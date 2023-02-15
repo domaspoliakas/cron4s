@@ -7,7 +7,7 @@ import xerial.sbt.Sonatype.GitHubHosting
 
 object GithubWorkflow {
   val SupportedScalaVersions = Seq("2.13.6", "2.12.14")
-  val DefaultJVM             = "amazon-corretto@1.17"
+  val DefaultJVM             = "adopt@1.8"
 
   val JvmCond = s"matrix.platform == 'jvm'"
 
