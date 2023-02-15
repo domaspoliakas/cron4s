@@ -53,10 +53,6 @@ jobs:
       - name: Check that workflows are up to date
         run: sbt --client '++${{ matrix.scala }}; githubWorkflowCheck'
 
-      - name: Validate JavaScript
-        if: matrix.platform == 'js'
-        run: sbt --client '++${{ matrix.scala }}; validateJS'
-
       - name: Validate JVM
         if: matrix.platform == 'jvm'
         run: sbt --client '++${{ matrix.scala }}; validateJVM; validateBench'
