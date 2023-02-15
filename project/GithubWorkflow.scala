@@ -7,10 +7,9 @@ import xerial.sbt.Sonatype.GitHubHosting
 
 object GithubWorkflow {
   val SupportedScalaVersions = Seq("2.13.6", "2.12.14")
-  val DefaultJVM             = "adopt@1.8"
+  val DefaultJVM             = "amazon-corretto@1.17"
 
   val JvmCond = s"matrix.platform == 'jvm'"
-  val JsCond  = s"matrix.platform == 'js'"
 
   ThisBuild / sonatypeProjectHosting := Some(
     GitHubHosting("precog", "cron4s", "bot@precog.com")
@@ -38,7 +37,7 @@ object GithubWorkflow {
         )
       ),
       githubWorkflowBuildMatrixAdditions +=
-        "platform" -> List("jvm", "js"),
+        "platform" -> List("jvm"),
       githubWorkflowBuildMatrixExclusions ++=
         githubWorkflowJavaVersions.value.filterNot(Set(DefaultJVM)).flatMap { java =>
           Seq(
