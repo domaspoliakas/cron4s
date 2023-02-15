@@ -24,13 +24,8 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         scala: [2.13.6, 2.12.14]
-        java: [adopt@1.8, adopt@1.11, adopt@1.15]
+        java: [adopt@1.8]
         platform: [jvm, js]
-        exclude:
-          - platform: js
-            java: adopt@1.11
-          - platform: js
-            java: adopt@1.15
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
@@ -69,7 +64,7 @@ jobs:
   publish:
     name: Publish Artifacts
     needs: [build]
-    if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v'))
+    if: github.event_name != 'pull_request' && (github.ref == 'refs/heads/main')
     strategy:
       matrix:
         os: [ubuntu-latest]
